@@ -1,12 +1,78 @@
 * {
   box-sizing: border-box;
+  font-family: Karla;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+.game {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 30rem;
+  border: 1px solid black;
+  margin: 3rem;
+  padding: 1rem;
+}
+
+.tile {
+  width: 9rem;
+  height: 9rem;
+  border: 1px solid black;
+  margin: 0.1rem;
+}
+
+.controls {
+  margin-left: 3rem;
+  display: flex;
+  width: 30rem;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline: 0.3rem;
+  height: 2.7rem;
+  font-size: 1.2rem;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button > span {
+  margin: 0;
+  font-weight: 500;
+}
+
+.btn-solve {
+  background-color: white;
+  padding-inline: 0.3rem;
+}
+
+.btn-solve > span {
+  color: black;
+}
+
+.btn-ngame {
+  padding-inline: 1.7rem;
+  background-color: #5783db;
+}
+
+.btn-ngame:hover {
+  background-color: white;
+  border: 1.5px solid #EEF2E6;
+}
+
+.btn-ngame:hover > span {
+  color: #5783db;
+}
+
+.btn-ngame> span {
+  color: white;
 }
