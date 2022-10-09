@@ -18,9 +18,34 @@ body {
   padding: 1rem;
 }
 
+.soln-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 9rem;
+  border: 1px solid black;
+  margin: 3rem;
+  padding: 0.7rem;
+}
+
 .tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 9rem;
   height: 9rem;
+  border: 1px solid black;
+  margin: 0.1rem;
+}
+
+.soln-tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.3rem;
   border: 1px solid black;
   margin: 0.1rem;
 }
@@ -75,4 +100,8 @@ body {
 
 .btn-ngame> span {
   color: white;
+}
+
+.row {
+  display: flex;
 }
