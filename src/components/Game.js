@@ -36,7 +36,7 @@ export default function Game({gameState, setGameState, setGameProgress, setGameS
 
         setTimeout(() => {
             animate(solution)
-        }, 700)
+        }, 500)
     }
 
     function solve(queue, visited){
