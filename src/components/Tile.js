@@ -1,7 +1,7 @@
 import React from "react";
 import { move } from "./SearchUtils";
 
-export default function Tile({ setGameState, gameState, i, type }){
+export default function Tile({ setGameState, gameState, i, type, clickable }){
     function updateGameState() {
         const ind = gameState.indexOf(0);
         if (ind == i){
@@ -21,8 +21,8 @@ export default function Tile({ setGameState, gameState, i, type }){
     }
 
     return (
-        <div className={type} onClick={updateGameState}>
-            <h1>{gameState[i]}</h1>
+        <div className={`${type} ${gameState[i] == 0 ? 'mt-tile' : 'st-tile'}`} onClick={clickable==true ? updateGameState : ()=>{}}>
+            <h1>{gameState[i] == 0 ? "" : gameState[i]}</h1>
         </div>
     )
 }

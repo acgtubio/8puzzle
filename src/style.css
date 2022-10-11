@@ -12,8 +12,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 30rem;
-  border: 1px solid black;
+  width: 35rem;
   margin: 3rem;
   padding: 1rem;
 }
@@ -24,8 +23,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 9rem;
-  border: 1px solid black;
-  margin: 3rem;
+  margin: 1rem;
   padding: 0.7rem;
 }
 
@@ -35,8 +33,10 @@ body {
   align-items: center;
   width: 9rem;
   height: 9rem;
-  border: 1px solid black;
-  margin: 0.1rem;
+  margin: 0.3rem;
+  font-size: 1.5rem;
+  color: #000300;
+  border-radius: 25px;
 }
 
 .soln-tile {
@@ -46,7 +46,6 @@ body {
   width: 2rem;
   height: 2rem;
   font-size: 0.3rem;
-  border: 1px solid black;
   margin: 0.1rem;
 }
 
@@ -86,7 +85,7 @@ body {
 
 .btn-ngame {
   padding-inline: 1.7rem;
-  background-color: #5783db;
+  background-color: #C8A2C8;
 }
 
 .btn-ngame:hover {
@@ -95,7 +94,7 @@ body {
 }
 
 .btn-ngame:hover > span {
-  color: #5783db;
+  color: #C8A2C8;
 }
 
 .btn-ngame> span {
@@ -104,4 +103,29 @@ body {
 
 .row {
   display: flex;
+}
+
+.st-tile {
+  background-color: white;
+  border: 0.12rem solid #878787;
+}
+
+.content {
+  margin-top: 9rem;
+  margin-left: 6rem;
+}
+
+.soln {
+  padding: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50vw;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid black; */
+  height: 7rem;
 }
