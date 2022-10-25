@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Puzzle from "./Puzzle.js";
-import { getMoves, Node } from "./SearchUtils.js";
+import { getMoves, Node, AstarNode, PriorityQueue } from "./SearchUtils.js";
+import BFS from "./BreadthFirst.js";
+import Astar from "./A-star.js";
 
 export default function Game({gameState, setGameState, setGameProgress, setGameSolution, gameSolution}){
 
@@ -13,19 +15,43 @@ export default function Game({gameState, setGameState, setGameProgress, setGameS
             const first = new Node(gameState.toString(), null, null);
             queue.push(first);
 
-            solve(queue, visited);
+            solve({
+                queue: queue, 
+                visited: visited,
+                searchType: 0,
+            });
         }}
-        ><span>SOLVE</span></div>
+        ><span>BFS SOLVE</span></div>
 
-    if(gameSolution.length > 0) {
-        secBtn = <div className="button btn-ngame" onClick={
-            () => {
-                const solSteps = [...gameSolution];
-                animate(solSteps);
-            }
-        }><span>Show Solution</span></div>
-    }
+    let starBtn = <div className="button btn-ngame" onClick={
+        () => {
+            setGameProgress(true);
+            // const queue = new PriorityQueue();
+            const queue = [];
+            const visited = [];
+            
+            const first = new AstarNode(gameState.toString(), null, null, 0, 0);
+            // queue.insert(first);
+            queue.push(first);
 
+            solve({
+                queue: queue, 
+                visited: visited,
+                searchType: 1,
+            });
+
+        }
+    }>
+        <span>A* SOLVE</span>
+    </div>
+
+    let solBtn = <div className="button btn-ngame" onClick={
+        () => {
+            const solSteps = [...gameSolution];
+            animate(solSteps);
+        }
+    }><span>SHOW SOLUTION</span></div> 
+    
     function animate(solution){
         if (solution.length == 0){
             return;
@@ -39,48 +65,42 @@ export default function Game({gameState, setGameState, setGameProgress, setGameS
         }, 500)
     }
 
-    function solve(queue, visited){
+    function solve({queue, visited, searchType}){
         const n = queue.shift();
-        visited.add(n.state);
-        
-        const nextMoves = getMoves(n.state.split(',').map( x => parseInt(x))).filter( x => !visited.has(x.newState.toString()));
 
-        for (const move of nextMoves) {
-            const moveState = move.newState.toString()
-            if (moveState == "0,1,2,3,4,5,6,7,8") {
-                var sol = [];
-                sol.push({
-                    state: moveState,
-                    name: move.name
-                });
-
-                var curr = n;
-                while(curr != null) {
-                    sol.push({
-                        state: curr.state,
-                        name: curr.move
-                    });
-                    curr = curr.parent
-                }
-                sol = sol.map(x => {
-                    return { ...x, state: x.state.split(',').map( y => parseInt(y))}
-                });
-                
-                setGameProgress(false);
-                setGameSolution(sol.reverse());
-                
+        // if BFS
+        if(searchType==0){
+            var res = BFS({
+                n: n,
+                queue: queue,
+                visited: visited,
+                setGameProgress: setGameProgress,
+                setGameSolution: setGameSolution
+            });
+            if(res==1){
                 return;
             }
-            if (!queue.find(e => e.state == move.newState.toString())) {
-
-                const next = new Node(move.newState.toString(), n,   move.name);
-
-                queue.push(next);
+        }
+        else if(searchType == 1){
+            var res = Astar({
+                n: n,
+                queue: queue,
+                visited: visited,
+                setGameProgress: setGameProgress,
+                setGameSolution: setGameSolution
+            })
+            if(res == 1){
+                return;
             }
         }
+        
 
         setTimeout(() => {
-            solve(queue, visited);
+            solve({
+                queue: queue, 
+                visited: visited,
+                searchType: searchType,
+            });
         }, 0); 
     }
 
@@ -106,7 +126,13 @@ export default function Game({gameState, setGameState, setGameProgress, setGameS
 
             <div className="controls">
                 <div className="button btn-solve" onClick={ shuffle }><span>SHUFFLE</span></div>
+            </div>
+            <div className="controls">
                 {secBtn}
+                {starBtn}
+            </div>
+            <div className="controls">
+                {gameSolution.length > 0 ? solBtn : <></>}
             </div>
         </>
     )
